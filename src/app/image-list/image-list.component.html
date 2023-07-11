@@ -1,0 +1,17 @@
+<div>
+  <div class="upload-container">
+    <input type="file" (change)="onFileSelected($event)" accept="image/*">
+    <button mat-raised-button color="primary" (click)="uploadFile()">上傳檔案</button>
+  </div>
+  <div class="card-container">
+    <mat-card *ngFor="let image of displayedImages" class="card-item">
+      <mat-card-header>
+        <mat-card-title>{{ image.originfileName }}</mat-card-title>
+      </mat-card-header>
+      <!-- <img mat-card-image [src]="getImageDataUrl(image.data)" alt="圖片"> -->
+      <mat-card-content>
+        <p>上傳時間：{{ image.uploadTime }}</p>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

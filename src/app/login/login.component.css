@@ -1,0 +1,32 @@
+.container {
+  height: 400px;
+  background: url(https://images.pexels.com/photos/1252890/pexels-photo-1252890.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2) no-repeat center bottom;
+  background-position: cover;
+  background-size: cover;
+  position: relative;
+  overflow: hidden;
+}
+
+.container:before {
+    content: "";
+    display: block;
+    width: 100%;
+    background-color: rgba(0, 0, 0, .5);
+    height: 100vh;
+}
+
+.login-card {
+  max-width: 350px;
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.title {
+  text-align: center;
+}
+
+.btn-center {
+  display: flex;
+  justify-content: center;
+}

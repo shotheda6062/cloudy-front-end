@@ -1,0 +1,16 @@
+<mat-toolbar  [style.background] = "(login$ | async) ? 'darkviolet' : 'seagreen'" class="navbar">
+  <a mat-button routerLink="/">Cloudy Homework</a>
+  <span class="to-right"></span>
+  <a mat-button *ngIf="!(login$ | async)" routerLink="/user/login">會員登入</a>
+  <a mat-button *ngIf="!(login$ | async)" routerLink="/user/register">會員註冊</a>
+
+  <button *ngIf="user$| async " mat-button [matMenuTriggerFor]="userMenu">
+    <span>{{ userAccountID}}</span> <mat-icon>arrow_drop_down</mat-icon>
+  </button>
+
+</mat-toolbar>
+<!-- User sub menu -->
+<mat-menu x-position="before" #userMenu="matMenu">
+  <button mat-menu-item routerLink="/image/list">圖片清單 </button>
+  <button mat-menu-item (click)="logout()" >會員登出</button>
+</mat-menu>
