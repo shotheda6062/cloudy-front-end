@@ -1,6 +1,6 @@
 {
   "/file/*": {
-    "target": "http://localhost:8080",
+    "target": "https://cloudyfile-gzs2jmgqlq-de.a.run.app",
     "secure": false,
     "changeOrigin": true
   }
