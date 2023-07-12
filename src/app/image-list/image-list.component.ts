@@ -1,7 +1,7 @@
 import { ImageItem } from './../models/image-item';
 import { Component } from '@angular/core';
 import { User } from '../models/user';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { UserService } from '../user/service/user.service';
 import { Router } from '@angular/router';
 import { ImageService } from '../image/service/image.service';
@@ -13,12 +13,11 @@ import { ImageService } from '../image/service/image.service';
 })
 export class ImageListComponent {
 
-  user$: Observable<User | null> | undefined;
   login$: Observable<boolean> | undefined;
 
   selectedFile : File | null = null;
 
-  displayedImages: ImageItem[] = [];
+  displayedImages$: BehaviorSubject<ImageItem[]> = new BehaviorSubject<ImageItem[]>([]);
 
   constructor(
     private userService: UserService,
@@ -28,36 +27,30 @@ export class ImageListComponent {
 
   ngOnInit() {
 
+    this.displayedImages$.subscribe((res) => {
+     return res;
+    });
+
     this.login$ = this.userService.getLoginStatus();
 
-        this.login$.subscribe(
-            res =>  {
-                if(res) this.router.navigate(['/']);
-            }
-        )
+    this.login$.subscribe(
+      res =>  {
+                if(!res) this.router.navigate(['/']);
+              }
+      )
 
-    this.user$ = this.userService.getCurrentUser();
-
-    this.user$.subscribe(
-        res => {
-          this.loadImages();
-        }
-    )
-
+    this.loadImages();
 
   }
 
   loadImages() {
     this.imageService.getlist().subscribe( res => {
-        this.displayedImages = res;
+        this.displayedImages$.next(res);
     });
-    // 使用帳號資訊呼叫 API 取得圖片清單
-    // 並將結果指派給 displayedImages 屬性
   }
 
-  getImageDataUrl(imageData: Uint8Array): string {
-    const base64String = btoa(String.fromCharCode(...imageData));
-    return `data:image/jpeg;base64,${base64String}`;
+  getImageDataUrl(imageData: string): string {
+    return `data:image/jpeg;base64,${imageData}`;
   }
 
   onFileSelected(event: any) {
@@ -66,12 +59,41 @@ export class ImageListComponent {
 
   uploadFile() {
     if (this.selectedFile) {
-      // 執行上傳檔案的邏輯，例如使用 FormData 或透過 API 進行上傳
-      // 在上傳完成後，重新載入圖片清單
-      this.selectedFile = null;
-      this.loadImages();
+
+      this.imageService.upload(this.selectedFile).subscribe(
+
+          (res) => {
+            this.selectedFile = null;
+            this.loadImages();
+          }
+
+      )
+
     }
   }
 
+  downloadFile(fileName : string, originFileName : string) {
+
+    const fileInfo = {  "fileName" : fileName
+                      , "originFileName" : originFileName}
+
+    this.imageService.donwload(fileInfo).subscribe(
+      (response) => {
+        this.saveFile(response, originFileName);
+      },
+      (error) => {
+        console.error('Error downloading file:', error);
+      }
+    )
+
+  }
+
+  saveFile(response: any, fileName: string) {
+    const blob = new Blob([response], { type: 'application/octet-stream' });
+    const downloadLink = document.createElement('a');
+    downloadLink.href = URL.createObjectURL(blob);
+    downloadLink.download = fileName;
+    downloadLink.click();
+  }
 
 }

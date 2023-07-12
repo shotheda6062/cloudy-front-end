@@ -1,7 +1,0 @@
-{
-  "/*": {
-    "target": "http://api.example.com",
-    "secure": false,
-    "changeOrigin": true
-  }
-}

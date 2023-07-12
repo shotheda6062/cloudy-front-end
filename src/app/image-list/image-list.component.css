@@ -1,16 +1,31 @@
-.upload-container {
-  margin-bottom: 16px;
-}
-
 .card-container {
   display: flex;
   flex-wrap: wrap;
-  gap: 16px;
+  justify-content: center;
 }
 
 .card-item {
-  background-color: #fff;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-  border-radius: 4px;
-  overflow: hidden;
+  width: 300px;
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #E1F5FE; /* 设置背景色为浅蓝色 */
+}
+
+.card-header-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card-image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.restricted-image {
+  max-width: 100%;
+  max-height: 200px;
 }

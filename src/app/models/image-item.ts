@@ -1,5 +1,7 @@
 export interface ImageItem {
   fileName: string;
-  originfileName : string;
-  uploadTime: string;
+  originFileName : string;
+  fileExtestion: string;
+  fileData : string;
+  createTime: string;
 }
