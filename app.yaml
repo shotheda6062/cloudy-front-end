@@ -1,0 +1,21 @@
+
+runtime: python27
+api_version: 1
+threadsafe: yes
+
+handlers:
+  - url: /
+    static_files: dist/coludy-homework-front-end/index.html
+    upload: dist/coludy-homework-front-end/index.html
+  - url: /
+    static_dir: dist/coludy-homework-front-end
+
+skip_files:
+  - e2e/
+  - node_modules/
+  - src/
+  - ^(.*/)?\..*$
+  - ^(.*/)?.*\.json$
+  - ^(.*/)?.*\.md$
+  - ^(.*/)?.*\.yaml$
+  - ^LICENSE
