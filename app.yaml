@@ -9,6 +9,8 @@ handlers:
     upload: dist/coludy-homework-front-end/index.html
   - url: /
     static_dir: dist/coludy-homework-front-end
+  - url: /file/*
+    script: auto
 
 skip_files:
   - e2e/
