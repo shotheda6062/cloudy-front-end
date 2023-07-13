@@ -2,6 +2,8 @@
   "/file/*": {
     "target": "https://cloudyfile-gzs2jmgqlq-de.a.run.app",
     "secure": false,
-    "changeOrigin": true
+    "changeOrigin": true,
+    "onProxyReq": "node proxy-debug.js onRequest $method $url",
+    "onProxyRes": "node proxy-debug.js onResponse $status"
   }
 }
