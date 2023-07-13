@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/coludy-homework-front-end",
+            "outputPath": "dist/coludy-homework-front-end/browser",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
@@ -58,6 +58,7 @@
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {"proxyConfig": "proxy.config.json"},
           "configurations": {
             "production": {
               "browserTarget": "coludy-homework-front-end:build:production"
@@ -91,6 +92,60 @@
             ],
             "scripts": []
           }
+        },
+        "server": {
+          "builder": "@angular-devkit/build-angular:server",
+          "options": {
+            "outputPath": "dist/coludy-homework-front-end/server",
+            "main": "server.ts",
+            "tsConfig": "tsconfig.server.json"
+          },
+          "configurations": {
+            "production": {
+              "outputHashing": "media"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "sourceMap": true,
+              "extractLicenses": false,
+              "vendorChunk": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve-ssr": {
+          "builder": "@nguniversal/builders:ssr-dev-server",
+          "configurations": {
+            "development": {
+              "browserTarget": "coludy-homework-front-end:build:development",
+              "serverTarget": "coludy-homework-front-end:server:development"
+            },
+            "production": {
+              "browserTarget": "coludy-homework-front-end:build:production",
+              "serverTarget": "coludy-homework-front-end:server:production"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "prerender": {
+          "builder": "@nguniversal/builders:prerender",
+          "options": {
+            "routes": [
+              "/"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "coludy-homework-front-end:build:production",
+              "serverTarget": "coludy-homework-front-end:server:production"
+            },
+            "development": {
+              "browserTarget": "coludy-homework-front-end:build:development",
+              "serverTarget": "coludy-homework-front-end:server:development"
+            }
+          },
+          "defaultConfiguration": "production"
         }
       }
     }
