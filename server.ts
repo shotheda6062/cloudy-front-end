@@ -12,6 +12,15 @@ export function app(): express.Express {
   const server = express();
   const distFolder = join(process.cwd(), 'dist/coludy-homework-front-end/browser');
   const indexHtml = existsSync(join(distFolder, 'index.original.html')) ? 'index.original.html' : 'index';
+  const { createProxyMiddleware } = require('http-proxy-middleware');
+
+  server.use(
+    '/file/*',
+    createProxyMiddleware({
+      target: 'https://cloudyfile-gzs2jmgqlq-de.a.run.app',
+      changeOrigin: true,
+    })
+  );
 
   // Our Universal express-engine (found @ https://github.com/angular/universal/tree/main/modules/express-engine)
   server.engine('html', ngExpressEngine({
@@ -37,7 +46,7 @@ export function app(): express.Express {
 }
 
 function run(): void {
-  const port = process.env['PORT'] || 4000;
+  const port = process.env['PORT'] || 8080;
 
   // Start up the Node server
   const server = app();
@@ -57,3 +66,7 @@ if (moduleFilename === __filename || moduleFilename.includes('iisnode')) {
 }
 
 export * from './src/main.server';
+
+function createProxyMiddleware(arg0: { target: string; changeOrigin: boolean; }): import("express-serve-static-core").RequestHandler<{}, any, any, import("qs").ParsedQs, Record<string, any>> {
+  throw new Error('Function not implemented.');
+}
