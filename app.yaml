@@ -5,9 +5,9 @@ env_variables:
 
 handlers:
   - url: /.*\.(js|css|png|jpg|jpeg|gif|ico|svg|woff|woff2|ttf|otf|json)$
-    static_files: dist/coludy-homework-front-end/\1
-    upload: dist/coludy-homework-front-end/.*\.(js|css|png|jpg|jpeg|gif|ico|svg|woff|woff2|ttf|otf|json)$
+    static_files: dist/coludy-homework-front-end/browser/\1
+    upload: dist/coludy-homework-front-end/browser/.*\.(js|css|png|jpg|jpeg|gif|ico|svg|woff|woff2|ttf|otf|json)$
 
   - url: /.*
-    static_files: dist/coludy-homework-front-end/index.html
-    upload: dist/coludy-homework-front-end/index.html
+    static_files: dist/coludy-homework-front-end/browser/index.html
+    upload: dist/coludy-homework-front-end/browser/index.html
