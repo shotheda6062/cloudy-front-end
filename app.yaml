@@ -3,11 +3,13 @@ runtime: nodejs18
 env_variables:
   NODE_ENV: production
 
+entrypoint: node dist/cloudy-homework-front-end/server/main.js
+
 handlers:
-  - url: /.*\.(js|css|png|jpg|jpeg|gif|ico|svg|woff|woff2|ttf|otf|json)$
-    static_files: dist/coludy-homework-front-end/browser/\1
-    upload: dist/coludy-homework-front-end/browser/.*\.(js|css|png|jpg|jpeg|gif|ico|svg|woff|woff2|ttf|otf|json)$
+  - url: /(.*\.(js|css|png|jpg|jpeg|gif|ico|svg|woff|woff2|ttf|otf|json))$
+    static_files: dist/cloudy-homework-front-end/browser/\1
+    upload: dist/cloudy-homework-front-end/browser/.*\.(js|css|png|jpg|jpeg|gif|ico|svg|woff|woff2|ttf|otf|json)$
 
   - url: /.*
-    static_files: dist/coludy-homework-front-end/browser/index.html
-    upload: dist/coludy-homework-front-end/browser/index.html
+    static_files: dist/cloudy-homework-front-end/browser/index.html
+    upload: dist/cloudy-homework-front-end/browser/index.html
