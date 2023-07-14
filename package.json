@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
 
-    "start": "ng serve --host 0.0.0.0 --port 8080",
+    "start": "node dist/coludy-homework-front-end/server/main.js",
     "build": "ng build",
     "serve:ssr": "node dist/coludy-homework-front-end/server/main.js"
   },
