@@ -2,10 +2,11 @@
   "name": "coludy-homework-front-end",
   "version": "0.0.0",
   "scripts": {
-
+    "ng": "ng",
+    "build": "ng build --prod",
+    "build:ssr": "ng run coludy-homework-front-end:server:production",
     "start": "node dist/coludy-homework-front-end/server/main.js",
-    "build": "ng build",
-    "serve:ssr": "node dist/coludy-homework-front-end/server/main.js"
+    "deploy": "gcloud app deploy"
   },
   "private": true,
   "dependencies": {
