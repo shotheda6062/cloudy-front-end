@@ -1,10 +1,11 @@
 import { ImageItem } from './../models/image-item';
 import { Component } from '@angular/core';
 import { User } from '../models/user';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, delay } from 'rxjs';
 import { UserService } from '../user/service/user.service';
 import { Router } from '@angular/router';
 import { ImageService } from '../image/service/image.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-image-list',
@@ -22,7 +23,8 @@ export class ImageListComponent {
   constructor(
     private userService: UserService,
     private router: Router,
-    private imageService : ImageService
+    private imageService : ImageService,
+    private snackbar: MatSnackBar,
   ) { }
 
   ngOnInit() {
@@ -62,9 +64,11 @@ export class ImageListComponent {
 
       this.imageService.upload(this.selectedFile).subscribe(
 
-          (res) => {
+        async (res) => {
+            this.snackbar.open('上傳成功', 'OK', { duration: 3000});
             this.selectedFile = null;
-            this.loadImages();
+            setTimeout(() => {this.loadImages();},3000)
+
           }
 
       )

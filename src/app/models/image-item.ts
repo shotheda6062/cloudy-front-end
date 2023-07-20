@@ -4,4 +4,6 @@ export interface ImageItem {
   fileExtestion: string;
   fileData : string;
   createTime: string;
+  originFileSize:BigInteger
+  compressFileSize:BigInteger
 }

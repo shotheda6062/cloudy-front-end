@@ -12,6 +12,8 @@
       <img class="restricted-image" mat-card-image [src]="getImageDataUrl(image.fileData)" alt={{image.originFileName}}>
       <mat-card-content>
         <p>上傳時間：{{ image.createTime }}</p>
+        <p>原圖大小：{{ image.originFileSize }}</p>
+        <p>壓縮大小：{{ image.compressFileSize }}</p>
         <button mat-raised-button color="primary" (click)="downloadFile(image.fileName,image.originFileName)">Download</button>
       </mat-card-content>
     </mat-card>
